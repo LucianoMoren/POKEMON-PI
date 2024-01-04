@@ -7,6 +7,7 @@ const createPokemon = require("../controllers/createPokemon");
 const types = require("../controllers/types");
 
 // router.get("/pokemons", pokemons);
+//*COMPLETE
 router.get("/pokemons/:idPokemon", getCharById);
 // router.get("/pokemons/name", getCharByName);
 // router.post("/pokemons", createPokemon);
