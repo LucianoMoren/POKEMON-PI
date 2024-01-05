@@ -5,6 +5,9 @@ module.exports = (sequelize) => {
     "Pokemons",
     {
       id: {
+        //! Ver como solucionar el problema del ID en la DB
+        // type: DataTypes.UUID,
+        // defaultValue: DataTypes.UUIDV4,
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,

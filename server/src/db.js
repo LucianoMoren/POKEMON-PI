@@ -41,6 +41,9 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
+PokemonModel(sequelize);
+TypeModel(sequelize);
+
 // Desestructuración de los modelos
 const { Pokemons, Type } = sequelize.models;
 
@@ -50,6 +53,9 @@ Type.belongsToMany(Pokemons, { through: "pokemon_type" });
 
 // Exportación de modelos e instancia Sequelize
 module.exports = {
+  Pokemons,
+  Type,
+  conn: sequelize,
   ...sequelize.models,
   conn: sequelize,
 };
