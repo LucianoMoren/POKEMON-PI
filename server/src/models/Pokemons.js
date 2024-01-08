@@ -6,10 +6,8 @@ module.exports = (sequelize) => {
     {
       id: {
         //! Ver como solucionar el problema del ID en la DB
-        // type: DataTypes.UUID,
-        // defaultValue: DataTypes.UUIDV4,
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },

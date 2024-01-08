@@ -1,3 +1,92 @@
+const axios = require("axios");
+
+const getPokemonDetails = async (url) => {
+  try {
+    const response = await axios.get(url);
+    const { name, id, sprites } = response.data;
+
+    const image = sprites.front_default;
+
+    return { name, id, image, url };
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getAllPokemons = async () => {
+  try {
+    let allPokemons = [];
+    let nextUrl = "https://pokeapi.co/api/v2/pokemon";
+
+    while (nextUrl) {
+      const { data } = await axios.get(nextUrl);
+      const pokemonDetailsPromises = data.results.map(async ({ url }) => {
+        const details = await getPokemonDetails(url);
+        return details;
+      });
+
+      const pokemonDetails = await Promise.all(pokemonDetailsPromises);
+      allPokemons.push(...pokemonDetails);
+      nextUrl = data.next;
+    }
+
+    return allPokemons;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const pokemons = async (req, res) => {
+  try {
+    const allPokemons = await getAllPokemons();
+
+    res.json(allPokemons);
+  } catch (error) {
+    console.error(error.response);
+    res.status(404).json({
+      message: "Hubo un problema con la obtención de los Pokémon",
+    });
+  }
+};
+
+module.exports = pokemons;
+
+//! CODIGO PARA TRAER LOS 21
+// const axios = require("axios");
+
+// const getAllPokemons = async (req, res) => {
+//   try {
+//     let allPokemons = [];
+//     let nextUrl = "https://pokeapi.co/api/v2/pokemon";
+
+//     while (nextUrl) {
+//       const { data } = await axios.get(nextUrl);
+//       const pokemons = data.results.map(({ name, url }) => ({ name, url }));
+//       allPokemons.push(...pokemons);
+//       nextUrl = data.next;
+//     }
+
+//     return allPokemons;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+// const pokemons = async (req, res) => {
+//   try {
+//     const allPokemons = await getAllPokemons();
+
+//     res.json(allPokemons);
+//   } catch (error) {
+//     console.error(error.response);
+//     res.status(404).json({
+//       message: "Hubo un problema con la obtención de los Pokémon",
+//     });
+//   }
+// };
+
+module.exports = pokemons;
+
 //! Trae 20 pokemons
 // const axios = require("axios");
 // const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -37,62 +126,3 @@
 // };
 
 // module.exports = pokemons;
-
-//! CODIGO PARA TRAER LOS 21
-
-// Importa la biblioteca axios para hacer peticiones HTTP.
-const axios = require("axios");
-
-// Define una función asincrónica llamada getAllPokemons.
-const getAllPokemons = async () => {
-  try {
-    // Inicializa un array vacío para almacenar todos los Pokémon.
-    let allPokemons = [];
-
-    // Inicializa la URL base de la API de Pokémon.
-    let nextUrl = "https://pokeapi.co/api/v2/pokemon";
-
-    // Realiza un bucle mientras haya una URL siguiente.
-    while (nextUrl) {
-      // Realiza una solicitud HTTP GET a la URL actual.
-      const { data } = await axios.get(nextUrl);
-
-      // Mapea los resultados de la respuesta para obtener nombre y URL de cada Pokémon.
-      const pokemons = data.results.map(({ name, url }) => ({ name, url }));
-
-      // Agrega los Pokémon mapeados al array general.
-      allPokemons.push(...pokemons);
-
-      // Actualiza la URL siguiente para la próxima iteración del bucle.
-      nextUrl = data.next;
-    }
-
-    // Devuelve el array completo de todos los Pokémon.
-    return allPokemons;
-  } catch (error) {
-    // Captura cualquier error que pueda ocurrir durante el proceso y lo lanza.
-    throw error;
-  }
-};
-
-// Define una función asincrónica llamada pokemons, que maneja la lógica de la ruta /pokemons.
-const pokemons = async (req, res) => {
-  try {
-    // Llama a la función getAllPokemons para obtener todos los Pokémon.
-    const allPokemons = await getAllPokemons();
-
-    // Envia la respuesta como un JSON que contiene todos los Pokémon.
-    res.json(allPokemons);
-  } catch (error) {
-    // Maneja cualquier error que pueda ocurrir durante la obtención de los Pokémon.
-    console.error(error.response);
-
-    // Envia una respuesta de error con un mensaje personalizado.
-    res.status(404).json({
-      message: "Hubo un problema con la obtención de los Pokémon",
-    });
-  }
-};
-
-// Exporta la función pokemons para que pueda ser utilizada en otros archivos.
-module.exports = pokemons;
