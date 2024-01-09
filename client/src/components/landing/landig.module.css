@@ -1,0 +1,106 @@
+.bg {
+  height: 100vh;
+  background-image: url("../../assets/images/bg/bg-red.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  margin: 0;
+}
+.logo {
+  position: absolute;
+  top: 20px;
+  height: 120px;
+}
+
+.a {
+  text-decoration: none !important;
+}
+
+.btn {
+  border: none;
+  border-radius: 15px;
+  height: 40px;
+  width: 120px;
+  background-color: rgb(252, 252, 252);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+  transition: 70ms ease;
+  margin: 0 auto 30px;
+}
+.arrowIco {
+  font-size: 12px;
+  text-align: center;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.title {
+  color: white;
+  font-size: 32px;
+  margin: 0 auto 10px;
+}
+
+.paragraph {
+  color: white;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+.lighting {
+  position: absolute;
+  bottom: 190px;
+  height: 50px;
+  animation: shine 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes shine {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.5;
+    filter: brightness(1.5);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+.pokeball {
+  position: absolute;
+  bottom: 15px;
+  height: 180px;
+  animation: shake 2s ease-in-out infinite; /* Puedes ajustar la duración y la función de temporización según tus preferencias */
+}

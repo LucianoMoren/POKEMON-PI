@@ -1,30 +1,36 @@
 const axios = require("axios");
-const { Type } = require("../db.js");
+const { Type } = require("../db");
 
 const getTypesHandler = async (req, res) => {
+  const URL = "https://pokeapi.co/api/v2/type";
+  let allTypes = [];
+
   try {
-    const response = await axios.get("https://pokeapi.co/api/v2/type");
-    const apiTypes = response.data.results;
+    let nextUrl = URL;
 
-    // Utilizando Promise.all para realizar las operaciones de manera concurrente
-    await Promise.all(
-      apiTypes.map(async (typeData) => {
-        const typeName = typeData.name;
+    while (nextUrl) {
+      const { data } = await axios.get(nextUrl);
 
-        const existingType = await Type.findOne({ where: { name: typeName } });
+      const types = data.results.map((type) => ({
+        name: type.name,
+        info: type.url,
+      }));
 
-        if (!existingType) {
-          await Type.create({ name: typeName });
-        }
-      })
-    );
+      allTypes = [...allTypes, ...types];
+      nextUrl = data.next;
+    }
 
-    // Retornando todos los tipos después de la operación
-    const allTypes = await Type.findAll();
-    res.json(allTypes);
+    for (let i = 0; i < allTypes.length; i++) {
+      await Type.findOrCreate({
+        where: {
+          name: allTypes[i].name,
+        },
+      });
+    }
+
+    return res.status(200).json(allTypes);
   } catch (error) {
-    console.error("Error al obtener y guardar tipos:", error.message);
-    res.status(500).json({ error: "Error al obtener y guardar tipos" });
+    return res.status(500).send({ error: error.message });
   }
 };
 
