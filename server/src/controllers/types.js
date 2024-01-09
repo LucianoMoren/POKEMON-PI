@@ -1,48 +1,31 @@
 const axios = require("axios");
-const { Type } = require("../db");
+const { Type } = require("../db.js");
 
-//!Busca los Types en la API
-const getTypesFromAPI = async () => {
+const getTypesHandler = async (req, res) => {
   try {
     const response = await axios.get("https://pokeapi.co/api/v2/type");
-    const types = response.data.results.map((type) => type.name);
-    return types;
-  } catch (error) {
-    console.error("Error al obtener tipos desde la API:", error.message);
-    throw error;
-  }
-};
-//! Busca los Types en la DB y si no encuentra uno, lo crea
-const saveTypesToDatabase = async (types) => {
-  try {
-    //* Recorre los tipos en la base de datos y si no lo encuentra, lo crea
-    for (const typeName of types) {
-      await Type.findOrCreate({ where: { name: typeName } });
-    }
-    console.log("Tipos guardados en la base de datos");
-  } catch (error) {
-    console.error("Error al guardar tipos en la base de datos:", error.message);
-    throw error;
-  }
-};
-//! Retorna los Types
-const getTypes = async (req, res) => {
-  try {
-    //* Busca los types en la DB
-    let types = await Type.findAll();
+    const apiTypes = response.data.results;
 
-    //* Si no encuentra ninguno, busca en la API y los guarda en la DB
-    if (types.length === 0) {
-      types = await getTypesFromAPI();
-      await saveTypesToDatabase(types);
-    }
+    // Utilizando Promise.all para realizar las operaciones de manera concurrente
+    await Promise.all(
+      apiTypes.map(async (typeData) => {
+        const typeName = typeData.name;
 
-    //* Retorna los tipos en formato json
-    res.json(types);
+        const existingType = await Type.findOne({ where: { name: typeName } });
+
+        if (!existingType) {
+          await Type.create({ name: typeName });
+        }
+      })
+    );
+
+    // Retornando todos los tipos después de la operación
+    const allTypes = await Type.findAll();
+    res.json(allTypes);
   } catch (error) {
-    console.error("Error al obtener tipos:", error.message);
-    res.status(500).json({ error: "Error al obtener tipos" });
+    console.error("Error al obtener y guardar tipos:", error.message);
+    res.status(500).json({ error: "Error al obtener y guardar tipos" });
   }
 };
 
-module.exports = getTypes;
+module.exports = getTypesHandler;

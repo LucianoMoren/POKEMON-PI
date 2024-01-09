@@ -14,9 +14,11 @@ const getCharacterById = async (req, res) => {
       try {
         const apiResponse = await axios.get(apiUrl);
         const characterData = apiResponse.data;
-        const { name, id, height, weight, sprites, stats } = characterData;
+        const { name, id, height, weight, sprites, stats, types } =
+          characterData;
 
         const image = sprites.other.dream_world.front_default;
+        const Types = types.map((type) => type.type.name);
 
         //! Buscar las estadísticas
         const hpStat = stats.find((stat) => stat.stat.name === "hp");
@@ -40,6 +42,7 @@ const getCharacterById = async (req, res) => {
             attack,
             defense,
             speed,
+            Types,
           };
 
           return res.json(character);

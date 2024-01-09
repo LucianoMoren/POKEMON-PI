@@ -11,12 +11,8 @@ module.exports = router;
 
 router.post("/pokemons", createPokemon);
 router.get("/pokemons/name", getCharByName);
-//* COMPLETE
 router.get("/pokemons", pokemons);
 router.get("/pokemons/:idPokemon", getCharById);
-//* COMPLETE
-//* COMPLETE
-
 router.get("/types", types);
 
 module.exports = router;
