@@ -1,13 +1,36 @@
 import "./App.css";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Landing from "./components/landing/landing";
 import Home from "./components/home/home";
 import Detail from "./components/detail/detail";
 import Form from "./components/form/Form";
 import About from "./components/about/About";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPokemons } from "../src/redux/actions";
 
 function App() {
+  const pokemons = useSelector((state) => state.pokemons);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const PokemonsA = async () => {
+      const URL = "http://localhost:3001/pokemons";
+      try {
+        const { data } = await axios.get(URL);
+
+        if (data) {
+          dispatch(getAllPokemons(data));
+        }
+      } catch (error) {
+        console.log("Error al traer Pokemons:", error.message);
+      }
+    };
+
+    PokemonsA();
+  }, []);
+
   return (
     <React.Fragment>
       <Routes>
@@ -22,3 +45,4 @@ function App() {
 }
 
 export default App;
+// pokemons={pokemons}
