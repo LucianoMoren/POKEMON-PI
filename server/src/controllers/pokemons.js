@@ -1,14 +1,15 @@
 const axios = require("axios");
-const { Pokemons } = require("../db");
+const { Pokemons, Type } = require("../db");
 
 const getPokemonDetails = async (url) => {
   try {
     const response = await axios.get(url);
-    const { name, id, sprites } = response.data;
+    const { name, id, sprites, types } = response.data;
 
-    const image = sprites.front_default;
+    const image = sprites.other.dream_world.front_default;
+    const Types = types.map(({ type }) => type.name);
 
-    return { name, id, image, url };
+    return { name, id, image, url, Types };
   } catch (error) {
     throw error;
   }
@@ -18,8 +19,10 @@ const getAllPokemons = async () => {
   try {
     let allPokemons = [];
     let nextUrl = "https://pokeapi.co/api/v2/pokemon";
+    let pokemonCount = 0;
+    const apiPokemonLimit = 200; // Límite solo para Pokémon de la API
 
-    while (nextUrl) {
+    while (nextUrl && pokemonCount < apiPokemonLimit) {
       const { data } = await axios.get(nextUrl);
       const pokemonDetailsPromises = data.results.map(async ({ url }) => {
         const details = await getPokemonDetails(url);
@@ -29,12 +32,15 @@ const getAllPokemons = async () => {
       const pokemonDetails = await Promise.all(pokemonDetailsPromises);
       allPokemons.push(...pokemonDetails);
       nextUrl = data.next;
+      pokemonCount += data.results.length;
     }
 
-    const pokemonFromDB = await Pokemons.findAll();
+    const pokemonFromDB = await Pokemons.findAll({ include: { model: Type } });
 
     if (pokemonFromDB) {
-      allPokemons.push(pokemonFromDB);
+      for (let i = 0; i < pokemonFromDB.length; i++) {
+        allPokemons.push(pokemonFromDB[i]);
+      }
     }
 
     return allPokemons;

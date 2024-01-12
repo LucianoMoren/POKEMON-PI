@@ -6,24 +6,19 @@ const getTypesHandler = async (req, res) => {
   let allTypes = [];
 
   try {
-    let nextUrl = URL;
+    const { data } = await axios.get(URL);
+    const result = data.results;
 
-    while (nextUrl) {
-      const { data } = await axios.get(nextUrl);
-
-      const types = data.results.map((type) => ({
-        name: type.name,
-        info: type.url,
-      }));
-
-      allTypes = [...allTypes, ...types];
-      nextUrl = data.next;
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].name) {
+        allTypes.push(result[i].name);
+      }
     }
 
     for (let i = 0; i < allTypes.length; i++) {
       await Type.findOrCreate({
         where: {
-          name: allTypes[i].name,
+          name: allTypes[i],
         },
       });
     }

@@ -90,6 +90,7 @@ const getCharacterById = async (req, res) => {
       try {
         const apiResponse = await axios.get(apiUrl);
         const characterData = apiResponse.data;
+
         const { name, id, height, weight, sprites, stats, types } =
           characterData;
 

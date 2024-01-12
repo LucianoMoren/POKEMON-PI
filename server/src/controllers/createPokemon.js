@@ -3,7 +3,8 @@ const { Pokemons, Type } = require("../db");
 
 const createPokemon = async (req, res) => {
   try {
-    const { name, height, weight, image, hp, attack, defense, speed, types } =
+    console.log("Body:", req.body);
+    const { name, height, weight, image, hp, attack, defense, speed } =
       req.body;
 
     const externalApiUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
@@ -21,7 +22,7 @@ const createPokemon = async (req, res) => {
 
     const existingLocalPokemon = await Pokemons.findOne({
       where: {
-        Nombre: name,
+        name: name,
       },
     });
 
@@ -33,37 +34,37 @@ const createPokemon = async (req, res) => {
     }
 
     // Convertir todos los nombres de tipos a minúsculas
-    const lowercaseTypes = types.map((type) => type.toLowerCase());
+    // const lowercaseTypes = types.map((type) => type.toLowerCase());
 
-    const existingTypes = await Type.findAll({
-      where: {
-        name: lowercaseTypes,
-      },
-    });
+    // const existingTypes = await Type.findAll({
+    //   where: {
+    //     name: lowercaseTypes,
+    //   },
+    // });
 
-    if (existingTypes.length !== lowercaseTypes.length) {
-      const missingTypes = lowercaseTypes.filter(
-        (type) =>
-          !existingTypes.find((existingType) => existingType.name === type)
-      );
+    // if (existingTypes.length !== lowercaseTypes.length) {
+    //   const missingTypes = lowercaseTypes.filter(
+    //     (type) =>
+    //       !existingTypes.find((existingType) => existingType.name === type)
+    //   );
 
-      return res.status(400).json({
-        message: `Los siguientes tipos no existen: ${missingTypes.join(", ")}`,
-      });
-    }
+    // return res.status(400).json({
+    //   message: `Los siguientes tipos no existen: ${missingTypes.join(", ")}`,
+    // });
+    // }
 
     const nuevoPokemon = await Pokemons.create({
-      Nombre: name,
-      Altura: height,
-      Peso: weight,
-      Imagen: image,
-      Vida: hp,
-      Ataque: attack,
-      Defensa: defense,
-      Velocidad: speed,
+      name,
+      height,
+      weight,
+      image,
+      hp,
+      attack,
+      defense,
+      speed,
     });
 
-    await nuevoPokemon.setTypes(existingTypes);
+    // await nuevoPokemon.setTypes(existingTypes);
 
     res.status(201).json({
       message: "Pokemon creado exitosamente",

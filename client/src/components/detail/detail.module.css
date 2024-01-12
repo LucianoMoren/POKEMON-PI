@@ -1,0 +1,106 @@
+.bg {
+  height: 100vh;
+  background-image: url("../../assets/images/bg/bg-white.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  margin: 0;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 30px;
+  font-weight: 700;
+  color: black;
+}
+
+.id {
+  color: #616161;
+}
+
+.megaData {
+  display: flex;
+  flex-direction: row;
+}
+
+.image {
+}
+
+.image img {
+  width: 300px;
+  height: 270px;
+}
+
+.superData {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.superData p {
+  margin: 0;
+}
+.princ {
+  font-weight: bolder;
+  color: white;
+}
+
+.data {
+  background-color: rgb(87 144 234);
+  width: 450px;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.hw {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hw div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stats {
+  background-color: rgb(236, 81, 81);
+  width: 450px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 10px;
+  height: 100px;
+}
+
+.stats div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}

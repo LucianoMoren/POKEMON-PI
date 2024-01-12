@@ -1,0 +1,55 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  background-image: url("../../assets/images/bg/bg-red.svg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0px 120px;
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+  padding: 0px 10px 0px 10px;
+
+  -webkit-box-shadow: 0px 5px 10px 1px rgba(189, 189, 189, 1);
+  -moz-box-shadow: 0px 5px 10px 1px rgba(189, 189, 189, 1);
+  box-shadow: 0px 5px 10px 1px rgba(189, 189, 189, 1);
+}
+
+.image {
+  height: 60px;
+  width: 160px;
+  position: absolute;
+  left: 10px;
+}
+.image img {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+.btn {
+  position: absolute;
+  right: 10px;
+}
+.btnAbout {
+  border: none;
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bolder;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(133, 3, 3, 1);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(133, 3, 3, 1);
+  box-shadow: 0px 0px 8px 0px rgba(133, 3, 3, 1);
+  color: rgb(164, 4, 4);
+}
+.btnAbout:hover {
+  background-color: rgb(215, 215, 215);
+}
+
+.a {
+  text-decoration: none;
+}

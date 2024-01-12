@@ -85,6 +85,10 @@ export default function reducer(state = initialState, { type, payload }) {
       } else if (payload === "AT D") {
         orderAttack.sort((a, b) => b.attack - a.attack);
       }
+      return {
+        ...state,
+        pokemons: orderAttack,
+      };
 
     default:
       return state;

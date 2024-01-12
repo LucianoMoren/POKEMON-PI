@@ -1,0 +1,32 @@
+.pg {
+  position: absolute;
+  bottom: 0;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pageItem {
+  margin: 0 5px;
+  transition: transform 50ms ease;
+}
+
+.pageItem:hover {
+  transform: scale(1.1);
+}
+
+.pageLink {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #a70d0d;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pageLink:hover {
+  background-color: #bb0000;
+}
