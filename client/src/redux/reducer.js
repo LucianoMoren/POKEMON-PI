@@ -69,20 +69,27 @@ export default function reducer(state = initialState, { type, payload }) {
       }
     case ORDER:
       const orderCopy = [...state.pokemons];
-      if (payload === "A") {
+      if (payload === "All") {
+        return {
+          ...state,
+          pokemons: state.allPokemons,
+        };
+      } else if (payload === "A") {
         orderCopy.sort((a, b) => a.name.localeCompare(b.name));
       } else if (payload === "D") {
         orderCopy.sort((a, b) => b.name.localeCompare(a.name));
-        return {
-          ...state,
-          pokemons: orderCopy,
-        };
       }
+
+      return {
+        ...state,
+        pokemons: orderCopy,
+      };
+
     case ORDER_ATTACK:
       const orderAttack = [...state.pokemons];
-      if (payload === "AT A") {
+      if (payload === "AT-D") {
         orderAttack.sort((a, b) => a.attack - b.attack);
-      } else if (payload === "AT D") {
+      } else if (payload === "AT-A") {
         orderAttack.sort((a, b) => b.attack - a.attack);
       }
       return {

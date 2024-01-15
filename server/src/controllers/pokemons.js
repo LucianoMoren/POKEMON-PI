@@ -4,12 +4,14 @@ const { Pokemons, Type } = require("../db");
 const getPokemonDetails = async (url) => {
   try {
     const response = await axios.get(url);
-    const { name, id, sprites, types } = response.data;
+    const { name, id, sprites, types, stats } = response.data;
 
     const image = sprites.other.dream_world.front_default;
     const Types = types.map(({ type }) => type.name);
 
-    return { name, id, image, url, Types };
+    const attackStat = stats.find((stat) => stat.stat.name === "attack");
+    const attack = attackStat.base_stat;
+    return { name, id, image, url, Types, attack };
   } catch (error) {
     throw error;
   }

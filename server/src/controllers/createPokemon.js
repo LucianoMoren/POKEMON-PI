@@ -33,26 +33,6 @@ const createPokemon = async (req, res) => {
       });
     }
 
-    // Convertir todos los nombres de tipos a minúsculas
-    // const lowercaseTypes = types.map((type) => type.toLowerCase());
-
-    // const existingTypes = await Type.findAll({
-    //   where: {
-    //     name: lowercaseTypes,
-    //   },
-    // });
-
-    // if (existingTypes.length !== lowercaseTypes.length) {
-    //   const missingTypes = lowercaseTypes.filter(
-    //     (type) =>
-    //       !existingTypes.find((existingType) => existingType.name === type)
-    //   );
-
-    // return res.status(400).json({
-    //   message: `Los siguientes tipos no existen: ${missingTypes.join(", ")}`,
-    // });
-    // }
-
     const nuevoPokemon = await Pokemons.create({
       name,
       height,
@@ -77,3 +57,22 @@ const createPokemon = async (req, res) => {
 };
 
 module.exports = createPokemon;
+// Convertir todos los nombres de tipos a minúsculas
+// const lowercaseTypes = types.map((type) => type.toLowerCase());
+
+// const existingTypes = await Type.findAll({
+//   where: {
+//     name: lowercaseTypes,
+//   },
+// });
+
+// if (existingTypes.length !== lowercaseTypes.length) {
+//   const missingTypes = lowercaseTypes.filter(
+//     (type) =>
+//       !existingTypes.find((existingType) => existingType.name === type)
+//   );
+
+// return res.status(400).json({
+//   message: `Los siguientes tipos no existen: ${missingTypes.join(", ")}`,
+// });
+// }

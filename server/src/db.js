@@ -48,8 +48,8 @@ TypeModel(sequelize);
 const { Pokemons, Type } = sequelize.models;
 
 // Definición de relaciones
-Pokemons.belongsToMany(Type, { through: "pokemon_type" });
-Type.belongsToMany(Pokemons, { through: "pokemon_type" });
+Pokemons.belongsToMany(Type, { through: "pokemon_type", timestamps: false });
+Type.belongsToMany(Pokemons, { through: "pokemon_type", timestamps: false });
 
 // Exportación de modelos e instancia Sequelize
 module.exports = {
