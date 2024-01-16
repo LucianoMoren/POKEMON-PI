@@ -3,13 +3,13 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Landing from "./components/landing/landing";
-import Home from "./components/home/home";
 import Detail from "./components/detail/Detail";
 import Form from "./components/form/Form";
 import About from "./components/about/About";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPokemons, getTypes } from "../src/redux/actions";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Home from "./components/home/Home";
 
 function App() {
   const getT = useSelector((state) => state.searchTypes);

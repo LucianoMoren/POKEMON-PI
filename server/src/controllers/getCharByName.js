@@ -51,18 +51,20 @@ const getCharByName = async (req, res) => {
         const defense = defenseStat.base_stat;
         const speed = speedStat.base_stat;
 
-        const character = {
-          name,
-          id,
-          height,
-          weight,
-          image,
-          hp,
-          attack,
-          defense,
-          speed,
-          Types,
-        };
+        const character = [
+          {
+            name,
+            id,
+            height,
+            weight,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            Types,
+          },
+        ];
 
         res.status(200).json(character);
       }

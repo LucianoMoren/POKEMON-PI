@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Pokemons } = require("../db");
+const { Pokemons, Type } = require("../db");
 
 const getCharacterById = async (req, res) => {
   try {
@@ -53,6 +53,7 @@ const getCharacterById = async (req, res) => {
       where: {
         id: idPokemon,
       },
+      include: [Type],
     });
 
     if (pokemonDB.length > 0) {

@@ -8,6 +8,7 @@ import {
   ORDER,
   ORDER_ATTACK,
   GET_TYPES,
+  SEARCH_POKEMON,
 } from "./actions-types";
 
 export const getAllPokemons = () => {
@@ -20,7 +21,10 @@ export const getAllPokemons = () => {
         payload: data,
       });
     } catch (error) {
-      return res.status(500).send({ error: error.message });
+      console.error("Error obteniendo los tipos: ", error);
+      if (error.response) {
+        console.error("Detalles del error:", error.response.data);
+      }
     }
   };
 };
@@ -41,6 +45,20 @@ export const getTypes = () => {
           console.error("Detalles del error:", error.response.data);
         }
       });
+  };
+};
+
+export const searchPokemon = (name) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/pokemons/name?name=${name}`
+      );
+      console.log(data, "ACA");
+      dispatch({ type: SEARCH_POKEMON, payload: data });
+    } catch (error) {
+      console.error("Error al buscar el Pokémon:", error);
+    }
   };
 };
 

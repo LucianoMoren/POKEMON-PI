@@ -5,7 +5,6 @@ import Pagination from "../pagination/Pagination";
 import Navbar from "../navbar/Navbar";
 import Order from "../order/Order";
 import { Link } from "react-router-dom";
-import Form from "../form/Form";
 
 function Home({ pokemons }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +25,7 @@ function Home({ pokemons }) {
           <Order />
 
           <Link to="/form">
-            <button>CREATE YOUR POKEMON</button>
+            <button className={style.btnCreate}>CREATE YOUR POKEMON</button>
           </Link>
         </div>
 

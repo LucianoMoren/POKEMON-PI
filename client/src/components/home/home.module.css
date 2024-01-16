@@ -48,3 +48,53 @@
 .filtersControllers {
   margin-top: 80px;
 }
+
+/* .btnCreate {
+  background: red;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bolder;
+  height: 80px;
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(133, 133, 133, 1);
+  -moz-box-shadow: 1px 1px 5px 0px rgba(133, 133, 133, 1);
+  box-shadow: 1px 1px 5px 0px rgba(133, 133, 133, 1);
+} */
+.btnCreate {
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: #eaeaea;
+  z-index: 1;
+  background: #b40000;
+  position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.btnCreate::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #ff0000;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+}
+
+.btnCreate:hover {
+  color: #ededed;
+}
+
+.btnCreate:hover::before {
+  width: 100%;
+}

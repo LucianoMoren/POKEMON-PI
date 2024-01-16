@@ -1,24 +1,16 @@
-import React, { useState } from "react";
-import style from "./searchbar.module.css";
+import { useDispatch } from "react-redux";
 import { FaSearch } from "react-icons/fa";
-import axios from "axios";
+import React, { useState } from "react";
+
+import style from "./searchbar.module.css";
+import { searchPokemon } from "../../redux/actions";
 
 function Searchbar() {
-  const onSearch = () => {
-    const name = req.query;
-    const URL = `http://localhost:3001/pokemons/name?name=${name}`;
-  };
-
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
 
-  const handleChange = (event) => {
-    const { value } = event.target;
-    setName(value);
-  };
-  const handleClick = (event) => {
-    event.preventDefault();
-
-    setName("");
+  const handleSearch = () => {
+    dispatch(searchPokemon(name));
   };
 
   return (
@@ -28,10 +20,10 @@ function Searchbar() {
         className={style.input}
         type="text"
         id="search"
-        onChange={handleChange}
         value={name}
+        onChange={(e) => setName(e.target.value)}
       ></input>
-      <button className={style.btnSearch} onClick={handleClick}>
+      <button className={style.btnSearch} onClick={handleSearch}>
         <FaSearch className={style.searchIco} />
       </button>
     </div>

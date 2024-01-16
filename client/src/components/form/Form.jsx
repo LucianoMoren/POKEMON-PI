@@ -2,6 +2,7 @@
 // import { useDispatch } from "react-redux";
 // import { postPokemons, getTypes } from "../../redux/actions";
 // import style from "./form.module.css";
+// import { Link } from "react-router-dom";
 
 // function Form({ getT }) {
 //   const dispatch = useDispatch();
@@ -65,6 +66,11 @@
 
 //   return (
 //     <div className={style.bg}>
+//       <div className={style.home}>
+//         <Link to="/home">
+//           <button>Back to home</button>
+//         </Link>
+//       </div>
 //       <div className={style.father}>
 //         <div className={style.image}></div>
 //         <form onSubmit={handleSubmit} className={style.form}>
@@ -160,9 +166,10 @@
 // export default Form;
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postPokemons, getTypes } from "../../redux/actions";
+import { postPokemons } from "../../redux/actions";
 import style from "./form.module.css";
-
+import { Link } from "react-router-dom";
+import pokeball from "../../assets/images/pokeball-red.png";
 function Form({ getT }) {
   const dispatch = useDispatch();
 
@@ -184,6 +191,10 @@ function Form({ getT }) {
 
     if (!types.includes(selectedType)) {
       setTypes((prevType) => [...prevType, selectedType]);
+      setCreate((prevCreate) => ({
+        ...prevCreate,
+        types: [...types, selectedType],
+      }));
     }
   };
 
@@ -197,7 +208,7 @@ function Form({ getT }) {
         attack: create.attack,
         defense: create.defense,
         speed: create.speed,
-        types: types, // Cambiado de create.types a types
+        types: create.types,
         image: create.image.name,
       };
 
@@ -224,10 +235,16 @@ function Form({ getT }) {
 
   return (
     <div className={style.bg}>
+      <div className={style.home}>
+        <Link to="/home">
+          <button>Back to home</button>
+        </Link>
+      </div>
       <div className={style.father}>
-        <div className={style.image}></div>
+        <div className={style.image}>
+          <img src={pokeball} alt="logotipe" className={style.pokeball} />
+        </div>
         <form onSubmit={handleSubmit} className={style.form}>
-          {/* ... otros campos de entrada ... */}
           <input
             type="text"
             name="name"
@@ -287,6 +304,7 @@ function Form({ getT }) {
             placeholder="Speed"
             className={style.input}
           />
+
           <select
             name="types"
             value={types}

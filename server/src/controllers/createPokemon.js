@@ -5,7 +5,6 @@ const postPokemon = async (req) => {
   const { name, height, weight, image, hp, attack, defense, speed, types } =
     req.body;
 
-  // Verificar que 'name' tiene un valor definido
   if (!name) {
     throw new Error("Name is required to query the database.");
   }

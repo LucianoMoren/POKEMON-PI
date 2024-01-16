@@ -10,6 +10,13 @@
   background-position: center;
   width: 100%;
   margin: 0;
+  position: relative;
+}
+
+.home {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .father {
@@ -19,12 +26,38 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  gap: 30px;
 }
 .image {
-  background-color: green;
+  background-color: transparent;
   width: 350px;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.pokeball {
+  animation: shake 2s ease-in-out infinite;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
 .form {
   background-color: transparent;
   height: 100%;
@@ -58,7 +91,8 @@
   padding: 5px;
 }
 option:hover {
-  background-color: #b2b2b2;
+  background-color: #a0f04a;
+  cursor: pointer;
 }
 
 .submitButton {
@@ -71,8 +105,13 @@ option:hover {
   border-radius: 5px;
   padding: 5px;
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .submitButton:hover {
   background-color: #1a9800;
+}
+
+.submitButton:active {
+  background-color: rgb(2, 77, 2);
 }

@@ -6,6 +6,7 @@ import {
   ORDER,
   ORDER_ATTACK,
   GET_TYPES,
+  SEARCH_POKEMON,
 } from "./actions-types";
 
 const initialState = {
@@ -27,6 +28,12 @@ export default function reducer(state = initialState, { type, payload }) {
       return {
         ...state,
         searchTypes: payload,
+      };
+
+    case SEARCH_POKEMON:
+      return {
+        ...state,
+        pokemons: payload,
       };
 
     case POST_POKEMONS:

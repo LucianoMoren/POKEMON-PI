@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import style from "./detail.module.css";
-
+import { TfiBackLeft } from "react-icons/tfi";
 function Detail() {
   const { id } = useParams();
   const URL = `http://localhost:3001/pokemons/${id}`;
@@ -22,6 +22,14 @@ function Detail() {
 
   return (
     <div className={style.bg}>
+      <div className={style.home}>
+        <Link to={"/home"}>
+          <button>
+            <TfiBackLeft className={style.ico} />
+          </button>
+        </Link>
+      </div>
+
       <div className={style.detail}>
         <div className={style.title}>
           <p>{character.name}</p>

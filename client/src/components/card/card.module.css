@@ -43,6 +43,13 @@
   flex-direction: row;
 }
 
+.type {
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  font-weight: bolder;
+}
+
 .span {
   border-radius: 5px;
   padding: 5px;

@@ -22,7 +22,7 @@ const getAllPokemons = async () => {
     let allPokemons = [];
     let nextUrl = "https://pokeapi.co/api/v2/pokemon";
     let pokemonCount = 0;
-    const apiPokemonLimit = 200; // Límite solo para Pokémon de la API
+    const apiPokemonLimit = 100; // Límite solo para Pokémon de la API
 
     while (nextUrl && pokemonCount < apiPokemonLimit) {
       const { data } = await axios.get(nextUrl);
