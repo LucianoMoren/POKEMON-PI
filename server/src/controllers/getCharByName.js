@@ -8,7 +8,7 @@ const getCharByName = async (req, res) => {
   try {
     const pokemonDB = await Pokemons.findAll({
       where: {
-        Nombre: { [Op.iLike]: name },
+        name: { [Op.iLike]: name },
       },
       include: [Type],
     });
@@ -18,13 +18,13 @@ const getCharByName = async (req, res) => {
       const transformedPokemonDB = pokemonDB.map((pokemon) => {
         return {
           id: pokemon.id,
-          Nombre: pokemon.Nombre,
-          Imagen: pokemon.Imagen,
-          Ataque: pokemon.Ataque,
-          Defensa: pokemon.Defensa,
-          Velocidad: pokemon.Velocidad,
-          Altura: pokemon.Altura,
-          Peso: pokemon.Peso,
+          name: pokemon.name,
+          image: pokemon.image,
+          attack: pokemon.attack,
+          defense: pokemon.defense,
+          speed: pokemon.speed,
+          height: pokemon.height,
+          weight: pokemon.weight,
           Types: pokemon.Types.map((type) => type.name),
         };
       });
@@ -69,9 +69,20 @@ const getCharByName = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(404).json({
-      message: "Hubo un problema al obtener la información del Pokémon",
-    });
+    if (axios.isAxiosError(error) && error.response.status === 404) {
+      console.error(error);
+      if (axios.isAxiosError(error) && error.response.status === 404) {
+        // Manejar el error 404 específicamente para la API de Pokémon
+        res.status(404).json({
+          message: "Pokémon no encontrado en la API",
+        });
+      } else {
+        // Otros errores
+        res.status(500).json({
+          message: "Hubo un problema al obtener la información del Pokémon",
+        });
+      }
+    }
   }
 };
 

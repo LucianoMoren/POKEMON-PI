@@ -1,78 +1,55 @@
 const axios = require("axios");
 const { Pokemons, Type } = require("../db");
 
-const createPokemon = async (req, res) => {
-  try {
-    console.log("Body:", req.body);
-    const { name, height, weight, image, hp, attack, defense, speed } =
-      req.body;
+const postPokemon = async (req) => {
+  const { name, height, weight, image, hp, attack, defense, speed, types } =
+    req.body;
 
-    const externalApiUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
-
-    try {
-      await axios.get(externalApiUrl);
-      return res.status(400).json({
-        message: `El Pokémon con nombre ${name} ya existe en la API externa.`,
-      });
-    } catch (error) {
-      if (error.response && error.response.status !== 404) {
-        throw error;
-      }
-    }
-
-    const existingLocalPokemon = await Pokemons.findOne({
-      where: {
-        name: name,
-      },
-    });
-
-    if (existingLocalPokemon) {
-      return res.status(400).json({
-        message:
-          "Ya existe un Pokémon con ese nombre en la base de datos local",
-      });
-    }
-
-    const nuevoPokemon = await Pokemons.create({
-      name,
-      height,
-      weight,
-      image,
-      hp,
-      attack,
-      defense,
-      speed,
-    });
-
-    // await nuevoPokemon.setTypes(existingTypes);
-
-    res.status(201).json({
-      message: "Pokemon creado exitosamente",
-      pokemon: nuevoPokemon,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al crear el Pokémon" });
+  // Verificar que 'name' tiene un valor definido
+  if (!name) {
+    throw new Error("Name is required to query the database.");
   }
+
+  const existingPokemon = await Pokemons.findOne({ where: { name: name } });
+
+  if (existingPokemon) {
+    throw new Error("Pokemon with this name already exists");
+  }
+
+  try {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+    );
+    if (response.data) {
+      throw new Error("Pokemon with this name already exists");
+    }
+  } catch (error) {
+    if (error.response && error.response.status !== 404) {
+      throw error;
+    }
+  }
+
+  let typesInstances = [];
+
+  for (let typeName of types) {
+    let typeInstance = await Type.findOrCreate({ where: { name: typeName } });
+    typesInstances.push(typeInstance[0]);
+  }
+
+  let newPokemon = await Pokemons.create({
+    name,
+    height,
+    weight,
+    image,
+    hp,
+    attack,
+    defense,
+    speed,
+  });
+
+  await newPokemon.setTypes(typesInstances);
+
+  return newPokemon;
 };
 
-module.exports = createPokemon;
-// Convertir todos los nombres de tipos a minúsculas
-// const lowercaseTypes = types.map((type) => type.toLowerCase());
-
-// const existingTypes = await Type.findAll({
-//   where: {
-//     name: lowercaseTypes,
-//   },
-// });
-
-// if (existingTypes.length !== lowercaseTypes.length) {
-//   const missingTypes = lowercaseTypes.filter(
-//     (type) =>
-//       !existingTypes.find((existingType) => existingType.name === type)
-//   );
-
-// return res.status(400).json({
-//   message: `Los siguientes tipos no existen: ${missingTypes.join(", ")}`,
-// });
-// }
+module.exports = postPokemon;

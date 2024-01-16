@@ -7,6 +7,7 @@ import {
   FILTER_BY_ORIGIN,
   ORDER,
   ORDER_ATTACK,
+  GET_TYPES,
 } from "./actions-types";
 
 export const getAllPokemons = () => {
@@ -24,6 +25,25 @@ export const getAllPokemons = () => {
   };
 };
 
+export const getTypes = () => {
+  return (dispatch) => {
+    axios
+      .get(`http://localhost:3001/types`)
+      .then(({ data }) => {
+        return dispatch({
+          type: GET_TYPES,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.error("Error obteniendo los tipos: ", error);
+        if (error.response) {
+          console.error("Detalles del error:", error.response.data);
+        }
+      });
+  };
+};
+
 export const postPokemons = (pokemon) => {
   const endpoint = "http://localhost:3001/pokemons";
   return async (dispatch) => {
@@ -34,7 +54,7 @@ export const postPokemons = (pokemon) => {
         payload: data,
       });
     } catch (error) {
-      return res.status(500).send({ error: error.message });
+      console.error(error.message);
     }
   };
 };

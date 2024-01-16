@@ -4,6 +4,8 @@ import Cards from "../cards/Cards";
 import Pagination from "../pagination/Pagination";
 import Navbar from "../navbar/Navbar";
 import Order from "../order/Order";
+import { Link } from "react-router-dom";
+import Form from "../form/Form";
 
 function Home({ pokemons }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +24,10 @@ function Home({ pokemons }) {
       <div className={style.complete}>
         <div className={style.filtersControllers}>
           <Order />
+
+          <Link to="/form">
+            <button>CREATE YOUR POKEMON</button>
+          </Link>
         </div>
 
         <div className={style.general}>

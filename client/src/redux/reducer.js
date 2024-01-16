@@ -5,11 +5,13 @@ import {
   FILTER_BY_ORIGIN,
   ORDER,
   ORDER_ATTACK,
+  GET_TYPES,
 } from "./actions-types";
 
 const initialState = {
   pokemons: [],
   allPokemons: [],
+  searchTypes: [],
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -19,6 +21,12 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         pokemons: payload,
         allPokemons: payload,
+      };
+
+    case GET_TYPES:
+      return {
+        ...state,
+        searchTypes: payload,
       };
 
     case POST_POKEMONS:
