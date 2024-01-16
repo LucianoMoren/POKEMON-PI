@@ -9,6 +9,7 @@ import {
   ORDER_ATTACK,
   GET_TYPES,
   SEARCH_POKEMON,
+  FILTER_POKEMON_BY_TYPES,
 } from "./actions-types";
 
 export const getAllPokemons = () => {
@@ -83,6 +84,22 @@ export const filterType = (type) => {
 
 export const filterByOrigin = (id) => {
   return { type: FILTER_BY_ORIGIN, payload: id };
+};
+
+export const filterPokemonByType = (type) => {
+  return async (dispatch, getState) => {
+    try {
+      const { allPokemons } = getState();
+
+      const filteredPokemons = allPokemons.filter(
+        (pokemon) => pokemon.Types && pokemon.Types.includes(type)
+      );
+
+      dispatch({ type: FILTER_POKEMON_BY_TYPES, payload: filteredPokemons });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
 export const order = (order) => {

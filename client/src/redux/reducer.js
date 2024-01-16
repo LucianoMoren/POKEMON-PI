@@ -7,6 +7,7 @@ import {
   ORDER_ATTACK,
   GET_TYPES,
   SEARCH_POKEMON,
+  FILTER_POKEMON_BY_TYPES,
 } from "./actions-types";
 
 const initialState = {
@@ -44,19 +45,9 @@ export default function reducer(state = initialState, { type, payload }) {
       };
 
     case FILTER_TYPE:
-      if (payload === "All") {
-        return {
-          ...state,
-          pokemons: state.allPokemons,
-        };
-      }
-
-      const filteredType = state.allPokemons.filter(
-        (pokemon) => pokemon.type === payload
-      );
       return {
         ...state,
-        pokemons: filteredType,
+        searchTypes: payload,
       };
 
     case FILTER_BY_ORIGIN:
@@ -69,6 +60,9 @@ export default function reducer(state = initialState, { type, payload }) {
         const filteredApi = state.allPokemons.filter(
           (pokemon) => typeof pokemon.id === "Number"
         );
+
+        console.log(filteredApi, "FILTERED API");
+
         return {
           ...state,
           pokemons: filteredApi,
@@ -77,11 +71,21 @@ export default function reducer(state = initialState, { type, payload }) {
         const filteredDb = state.allPokemons.filter(
           (pokemon) => typeof pokemon.id === "String"
         );
+
+        console.log(filteredDb, "FILTERED DB");
+
         return {
           ...state,
           pokemons: filteredDb,
         };
       }
+
+    case FILTER_POKEMON_BY_TYPES:
+      return {
+        ...state,
+        pokemons: payload,
+      };
+
     case ORDER:
       const orderCopy = [...state.pokemons];
       if (payload === "All") {

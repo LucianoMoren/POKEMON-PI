@@ -5,8 +5,10 @@ import Pagination from "../pagination/Pagination";
 import Navbar from "../navbar/Navbar";
 import Order from "../order/Order";
 import { Link } from "react-router-dom";
+import Filter from "../filter/Filter";
+import FilterByOrigin from "../filterbyorigin/FilterByOrigin";
 
-function Home({ pokemons }) {
+function Home({ pokemons, getT }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
@@ -23,7 +25,8 @@ function Home({ pokemons }) {
       <div className={style.complete}>
         <div className={style.filtersControllers}>
           <Order />
-
+          <FilterByOrigin />
+          <Filter getT={getT} />
           <Link to="/form">
             <button className={style.btnCreate}>CREATE YOUR POKEMON</button>
           </Link>

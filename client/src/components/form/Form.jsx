@@ -168,9 +168,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postPokemons } from "../../redux/actions";
 import style from "./form.module.css";
-import { Link } from "react-router-dom";
 import pokeball from "../../assets/images/pokeball-red.png";
-function Form({ getT }) {
+
+function Form({ getT, returnHome }) {
   const dispatch = useDispatch();
 
   const [create, setCreate] = useState({
@@ -236,9 +236,7 @@ function Form({ getT }) {
   return (
     <div className={style.bg}>
       <div className={style.home}>
-        <Link to="/home">
-          <button>Back to home</button>
-        </Link>
+        <button onClick={returnHome}>Back to home</button>
       </div>
       <div className={style.father}>
         <div className={style.image}>

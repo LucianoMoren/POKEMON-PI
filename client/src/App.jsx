@@ -1,7 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Landing from "./components/landing/landing";
 import Detail from "./components/detail/Detail";
 import Form from "./components/form/Form";
@@ -12,6 +12,12 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./components/home/Home";
 
 function App() {
+  const navigate = useNavigate();
+
+  const returnHome = () => {
+    navigate("/home");
+  };
+
   const getT = useSelector((state) => state.searchTypes);
 
   const pokemons = useSelector((state) => state.pokemons);
@@ -41,9 +47,15 @@ function App() {
       <React.Fragment>
         <Routes>
           <Route path="/" element={<Landing />}></Route>
-          <Route path="/home" element={<Home pokemons={pokemons} />}></Route>
+          <Route
+            path="/home"
+            element={<Home pokemons={pokemons} getT={getT} />}
+          ></Route>
           <Route path="/pokemons/:id" element={<Detail />}></Route>
-          <Route path="/form" element={<Form getT={getT} />}></Route>
+          <Route
+            path="/form"
+            element={<Form getT={getT} returnHome={returnHome} />}
+          ></Route>
           <Route path="/about" element={<About />}></Route>
         </Routes>
       </React.Fragment>
