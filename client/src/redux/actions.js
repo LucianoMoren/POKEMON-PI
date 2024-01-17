@@ -55,7 +55,6 @@ export const searchPokemon = (name) => {
       const { data } = await axios.get(
         `http://localhost:3001/pokemons/name?name=${name}`
       );
-      console.log(data, "ACA");
       dispatch({ type: SEARCH_POKEMON, payload: data });
     } catch (error) {
       console.error("Error al buscar el Pokémon:", error);

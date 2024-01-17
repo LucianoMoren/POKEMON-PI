@@ -5,7 +5,7 @@ import { filterPokemonByType } from "../../redux/actions";
 
 function Filter({ getT }) {
   const dispatch = useDispatch();
-  console.log(getT, "ACA");
+
   const fPokemon = (pokemonType) => {
     dispatch(filterPokemonByType(pokemonType));
   };

@@ -7,6 +7,7 @@ import { searchPokemon } from "../../redux/actions";
 
 function Searchbar() {
   const dispatch = useDispatch();
+
   const [name, setName] = useState("");
 
   const handleSearch = () => {

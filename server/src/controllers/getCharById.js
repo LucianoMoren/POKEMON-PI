@@ -61,13 +61,14 @@ const getCharacterById = async (req, res) => {
 
       const characterFromDB = {
         id: dbPokemon.id,
-        name: dbPokemon.Nombre,
-        image: dbPokemon.Imagen,
-        attack: dbPokemon.Ataque,
-        defense: dbPokemon.Defensa,
-        speed: dbPokemon.Velocidad,
-        height: dbPokemon.Altura,
-        weight: dbPokemon.Peso,
+        name: dbPokemon.name,
+        image: dbPokemon.image,
+        attack: dbPokemon.attack,
+        defense: dbPokemon.defense,
+        hp: dbPokemon.hp,
+        speed: dbPokemon.speed,
+        height: dbPokemon.height,
+        weight: dbPokemon.weight,
         Types: dbPokemon.Types ? dbPokemon.Types.map((type) => type.name) : [],
       };
 

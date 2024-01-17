@@ -24,9 +24,12 @@ function Home({ pokemons, getT }) {
 
       <div className={style.complete}>
         <div className={style.filtersControllers}>
-          <Order />
-          <FilterByOrigin />
-          <Filter getT={getT} />
+          <div className={style.orderAndFilter}>
+            <Order />
+            <FilterByOrigin />
+            <Filter getT={getT} />
+          </div>
+
           <Link to="/form">
             <button className={style.btnCreate}>CREATE YOUR POKEMON</button>
           </Link>

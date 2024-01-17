@@ -14,7 +14,6 @@ const getCharByName = async (req, res) => {
     });
 
     if (pokemonDB.length > 0) {
-      // Transformar los tipos para que solo contengan el nombre
       const transformedPokemonDB = pokemonDB.map((pokemon) => {
         return {
           id: pokemon.id,

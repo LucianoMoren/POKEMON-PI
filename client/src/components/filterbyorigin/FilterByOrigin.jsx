@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { filterByOrigin } from "../../redux/actions";
+import style from "./filterbyorigin.module.css";
 
 function FilterByOrigin() {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function FilterByOrigin() {
   };
 
   return (
-    <div>
+    <div className={style.bg}>
       <select value={apiDbFilter} onChange={handleApiDbFilterChange}>
         <option value="All">All</option>
         <option value="API">Api</option>
