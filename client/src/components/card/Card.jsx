@@ -87,7 +87,6 @@ function Card(props) {
         <Link to={`/pokemons/${props.id}`} className={style.a}>
           <h1>{props.name.toUpperCase()}</h1>
         </Link>
-
         <div className={style.types}>{typeElements}</div>
       </div>
     </div>

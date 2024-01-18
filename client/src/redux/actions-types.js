@@ -7,3 +7,4 @@ export const ORDER_ATTACK = "ORDER_ATTACK";
 export const GET_TYPES = "GET_TYPES";
 export const SEARCH_POKEMON = "SEARCH_POKEMON";
 export const FILTER_POKEMON_BY_TYPES = "FILTER_POKEMON_BY_TYPES";
+export const RESET = "RESET";

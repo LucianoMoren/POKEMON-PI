@@ -10,10 +10,13 @@ function About() {
       <div className={style.divParagraph}>
         <div>
           <p className={style.paragraph}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed,
-            dolore dolor! Quo nisi cupiditate laborum accusantium consequuntur
-            inventore, ratione adipisci quidem dolorum excepturi earum dolore
-            culpa temporibus quia. Repudiandae, repellendus!
+            Soy Luciano Moren, un chico de 20 años de Entre Ríos, Argentina,
+            enfocado en el estudio de programación. Mi día a día se centra en
+            explorar diferentes lenguajes y proyectos. Con un enfoque analítico,
+            disfruto resolviendo desafíos y creciendo en este campo en constante
+            evolución. Más allá de la programación, hay muchas otras dimensiones
+            en mi vida que estoy explorando. ¡Listo para seguir aprendiendo y
+            avanzando en este viaje tecnológico!
           </p>
         </div>
       </div>

@@ -10,6 +10,7 @@ import {
   GET_TYPES,
   SEARCH_POKEMON,
   FILTER_POKEMON_BY_TYPES,
+  RESET,
 } from "./actions-types";
 
 export const getAllPokemons = () => {
@@ -67,6 +68,8 @@ export const postPokemons = (pokemon) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, pokemon);
+
+      console.log(data, "dataaa");
       return dispatch({
         type: POST_POKEMONS,
         payload: data,
@@ -82,6 +85,7 @@ export const filterType = (type) => {
 };
 
 export const filterByOrigin = (id) => {
+  console.log(id, "IDDDDDDDDDD");
   return { type: FILTER_BY_ORIGIN, payload: id };
 };
 
@@ -107,4 +111,8 @@ export const order = (order) => {
 
 export const orderAttack = (attack) => {
   return { type: ORDER_ATTACK, payload: attack };
+};
+
+export const reset = (reset) => {
+  return { type: RESET, payload: reset };
 };

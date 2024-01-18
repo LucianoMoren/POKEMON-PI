@@ -7,6 +7,7 @@ import Order from "../order/Order";
 import { Link } from "react-router-dom";
 import Filter from "../filter/Filter";
 import FilterByOrigin from "../filterbyorigin/FilterByOrigin";
+import Reset from "../reset/Reset";
 
 function Home({ pokemons, getT }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,9 +26,19 @@ function Home({ pokemons, getT }) {
       <div className={style.complete}>
         <div className={style.filtersControllers}>
           <div className={style.orderAndFilter}>
+            <div className={style.title}>
+              <h3>Order</h3>
+            </div>
             <Order />
+            <div className={style.title}>
+              <h3>Filters</h3>
+            </div>
             <FilterByOrigin />
             <Filter getT={getT} />
+            <div className={style.title}>
+              <h3>Reset</h3>
+            </div>
+            <Reset />
           </div>
 
           <Link to="/form">

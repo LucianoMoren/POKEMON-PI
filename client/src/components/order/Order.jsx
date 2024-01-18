@@ -23,13 +23,6 @@ function Order() {
 
   return (
     <div className={style.bg}>
-      <div className={style.title}>
-        <h3>Order</h3>
-        <button className={style.button} onClick={() => handleOrder("All")}>
-          <GrPowerReset />
-        </button>
-      </div>
-
       <div className={style.asdc}>
         <button className={style.button} onClick={() => handleOrder("A")}>
           <AiOutlineSortAscending className={style.iconAl} />

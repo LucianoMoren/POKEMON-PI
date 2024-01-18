@@ -54,7 +54,9 @@ function App() {
           <Route path="/pokemons/:id" element={<Detail />}></Route>
           <Route
             path="/form"
-            element={<Form getT={getT} returnHome={returnHome} />}
+            element={
+              <Form getT={getT} returnHome={returnHome} pokemons={pokemons} />
+            }
           ></Route>
           <Route path="/about" element={<About />}></Route>
         </Routes>

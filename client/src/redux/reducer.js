@@ -8,6 +8,7 @@ import {
   GET_TYPES,
   SEARCH_POKEMON,
   FILTER_POKEMON_BY_TYPES,
+  RESET,
 } from "./actions-types";
 
 const initialState = {
@@ -24,7 +25,6 @@ export default function reducer(state = initialState, { type, payload }) {
         pokemons: payload,
         allPokemons: payload,
       };
-
     case GET_TYPES:
       return {
         ...state,
@@ -58,10 +58,8 @@ export default function reducer(state = initialState, { type, payload }) {
         };
       } else if (payload === "API") {
         const filteredApi = state.allPokemons.filter(
-          (pokemon) => typeof pokemon.id === "Number"
+          (pokemon) => typeof pokemon.id === "number"
         );
-
-        console.log(filteredApi, "FILTERED API");
 
         return {
           ...state,
@@ -69,7 +67,7 @@ export default function reducer(state = initialState, { type, payload }) {
         };
       } else if (payload === "DB") {
         const filteredDb = state.allPokemons.filter(
-          (pokemon) => typeof pokemon.id === "String"
+          (pokemon) => typeof pokemon.id === "string"
         );
 
         console.log(filteredDb, "FILTERED DB");
@@ -88,12 +86,7 @@ export default function reducer(state = initialState, { type, payload }) {
 
     case ORDER:
       const orderCopy = [...state.pokemons];
-      if (payload === "All") {
-        return {
-          ...state,
-          pokemons: state.allPokemons,
-        };
-      } else if (payload === "A") {
+      if (payload === "A") {
         orderCopy.sort((a, b) => a.name.localeCompare(b.name));
       } else if (payload === "D") {
         orderCopy.sort((a, b) => b.name.localeCompare(a.name));
@@ -116,6 +109,12 @@ export default function reducer(state = initialState, { type, payload }) {
         pokemons: orderAttack,
       };
 
+    case RESET:
+      if (payload === "Reset")
+        return {
+          ...state,
+          pokemons: state.allPokemons,
+        };
     default:
       return state;
   }

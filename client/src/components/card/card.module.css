@@ -18,11 +18,26 @@
   height: 96px;
   width: 96px;
 }
-.contImage img {
+/* .contImage img {
   height: 96px;
   width: 96px;
   filter: drop-shadow(4px 4px 2px rgba(94, 94, 94, 0.5));
+} */
+
+.contImage img {
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s;
+  filter: drop-shadow(4px 4px 2px rgba(94, 94, 94, 0.5));
 }
+
+.bg:hover img {
+  transform: scale(1.1);
+  border-radius: 10px;
+}
+
 .contData {
   display: flex;
   flex-direction: column;

@@ -19,9 +19,15 @@
 .filtersControllers {
   background-color: transparent;
   border-right: solid 1px #c4c1c1;
-  width: 10%;
-  padding: 5px;
+  width: 150px;
   position: relative;
+}
+
+.title h3 {
+  font-size: 18px;
+  font-weight: bolder;
+  margin: 0;
+  color: rgb(33, 33, 33);
 }
 
 .general {
@@ -58,17 +64,6 @@
   padding-top: 20px;
 }
 
-/* .btnCreate {
-  background: red;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-weight: bolder;
-  height: 80px;
-  -webkit-box-shadow: 1px 1px 5px 0px rgba(133, 133, 133, 1);
-  -moz-box-shadow: 1px 1px 5px 0px rgba(133, 133, 133, 1);
-  box-shadow: 1px 1px 5px 0px rgba(133, 133, 133, 1);
-} */
 .btnCreate {
   padding: 15px 25px;
   border: unset;
@@ -85,6 +80,7 @@
   overflow: hidden;
   position: absolute;
   bottom: 20px;
+  left: 10px;
   width: 130px;
 }
 
