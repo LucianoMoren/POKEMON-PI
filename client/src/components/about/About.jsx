@@ -2,10 +2,18 @@ import React from "react";
 import style from "./about.module.css";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import image from "../../assets/images/bg/bg-white.svg";
-
+import { TfiBackLeft } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 function About() {
   return (
     <div className={style.parent}>
+      <div className={style.home}>
+        <Link to={"/home"}>
+          <button>
+            <TfiBackLeft className={style.ico} />
+          </button>
+        </Link>
+      </div>
       <div className={style.divImage}></div>
       <div className={style.divParagraph}>
         <div>

@@ -65,3 +65,5 @@ const pokemons = async (req, res) => {
 };
 
 module.exports = pokemons;
+
+//! //////////////////////////////////////////////////

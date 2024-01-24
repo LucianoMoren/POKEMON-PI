@@ -112,6 +112,7 @@ option:hover {
   padding: 5px;
   font-weight: bolder;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .submitButton:hover {
@@ -120,4 +121,93 @@ option:hover {
 
 .submitButton:active {
   background-color: rgb(2, 77, 2);
+}
+
+.previewImage {
+  height: 120px;
+}
+
+.successAlert {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.errorAlert {
+  background-color: #f44336;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.home {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 0 0 20px 0;
+}
+
+.home a {
+  height: 50px;
+  width: 50px;
+  font-size: 40px;
+  background: transparent;
+  border: none;
+  color: #8a8989;
+  font-weight: bolder;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ico {
+  color: rgb(17, 17, 17);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ico:hover {
+  color: #ed2121;
+}
+
+.padre {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+.imgg {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+}
+.btnn {
+  border: none;
+  background: #2cff22;
+  border-radius: 5px;
+  height: 70px;
+  width: 108px;
+  color: white;
+}
+
+.previewImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 180px;
 }

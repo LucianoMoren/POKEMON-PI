@@ -92,3 +92,7 @@
   color: rgb(30, 30, 30);
   text-shadow: 2px 2px 2px #aeadad;
 }
+
+h1 {
+  text-align: center;
+}
