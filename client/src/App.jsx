@@ -2,7 +2,7 @@ import "./App.css";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Landing from "./components/landing/landing";
+import Landing from "./components/landing/Landing";
 import Detail from "./components/detail/Detail";
 import Form from "./components/form/Form";
 import About from "./components/about/About";
