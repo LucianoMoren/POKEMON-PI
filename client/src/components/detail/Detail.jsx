@@ -3,10 +3,12 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import style from "./detail.module.css";
 import { TfiBackLeft } from "react-icons/tfi";
+const URL_API = import.meta.env.VITE_URL_API;
+
 function Detail() {
   const { id } = useParams();
 
-  const URL = `http://localhost:3001/pokemons/${id}`;
+  const URL = `${URL_API}/pokemons/${id}`;
 
   const [character, setCharacter] = useState({});
 

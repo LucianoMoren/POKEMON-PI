@@ -12,9 +12,9 @@ import {
   FILTER_POKEMON_BY_TYPES,
   RESET,
 } from "./actions-types";
-
+const URL_API = import.meta.env.VITE_URL_API;
 export const getAllPokemons = () => {
-  const endpoint = "http://localhost:3001/pokemons";
+  const endpoint = `${URL_API}/pokemons`;
   return async (dispatch) => {
     try {
       const { data } = await axios.get(endpoint);
@@ -34,7 +34,7 @@ export const getAllPokemons = () => {
 export const getTypes = () => {
   return (dispatch) => {
     axios
-      .get(`http://localhost:3001/types`)
+      .get(`${URL_API}/types`)
       .then(({ data }) => {
         return dispatch({
           type: GET_TYPES,
@@ -53,9 +53,7 @@ export const getTypes = () => {
 export const searchPokemon = (name) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/pokemons/name?name=${name}`
-      );
+      const { data } = await axios.get(`${URL_API}/pokemons/name?name=${name}`);
       dispatch({ type: SEARCH_POKEMON, payload: data });
     } catch (error) {
       console.error("Error al buscar el Pokémon:", error);
@@ -64,7 +62,7 @@ export const searchPokemon = (name) => {
 };
 
 export const postPokemons = (pokemon) => {
-  const endpoint = "http://localhost:3001/pokemons";
+  const endpoint = `${URL_API}/pokemons`;
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, pokemon);

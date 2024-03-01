@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPokemons, getTypes } from "../src/redux/actions";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./components/home/Home";
+const URL_API = import.meta.env.VITE_URL_API;
 
 function App() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function App() {
     dispatch(getTypes());
 
     const PokemonsA = async () => {
-      const URL = "http://localhost:3001/pokemons";
+      const URL = `${URL_API}/pokemons`;
       try {
         const { data } = await axios.get(URL);
 
