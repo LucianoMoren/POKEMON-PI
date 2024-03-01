@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from "./Filter.module.css";
+import style from "./filter.module.css";
 import { useDispatch } from "react-redux";
 import { filterPokemonByType } from "../../redux/actions";
 
